@@ -26,3 +26,34 @@ function renderBookList(bookList) {
   existingElement && root.removeChild(existingElement);
   bookList.length > 0 && searchField.value && root.insertAdjacentHTML('beforeend', BookList(bookList));
 }
+
+const elements = document.querySelectorAll(".book-list__item"); // Mouse target
+
+  for(let i = 0; i < elements.length; i++){ // Listerners to the items in the list 
+
+    elements[i].addEventListener("mouseenter", (e) => {
+      let book = getBookDetails(e.target.id)
+      book.then(function (result){
+        renderBookItem(result);
+      })
+    });
+
+    elements[i].addEventListener("mouseleave", () => {
+      const existElement = document.getElementById("bookDetail");
+      existElement && existElement.remove();
+    });
+  }
+
+
+function renderBookItem(book){
+
+  const existElement = document.getElementById("bookDetail");
+  const root = document.getElementById("root");
+
+  existElement && existElement.remove();
+
+  let html = bookDetails(book);
+  
+  root.insertAdjacentHTML("afterend", html);
+
+}
