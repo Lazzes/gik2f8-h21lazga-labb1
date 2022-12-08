@@ -19,7 +19,7 @@ searchField.addEventListener('keyup', (e) =>
 );
 
 function renderBookList(bookList) {
-  const existingElement = document.querySelector('.book-list');
+  const existingElement = document.querySelector('.book-list'); 
 
   const root = document.getElementById('root');
   existingElement && root.removeChild(existingElement);
@@ -28,17 +28,16 @@ function renderBookList(bookList) {
 
     let bookUl = document.querySelector(".book-list");
 
-    if (bookUl){
+    if (bookUl){ /* kollar om listan inte är null*/
         bookUl.addEventListener("mouseover", function(e) {
             if (e.target && e.target.matches("li.book-list__item")) {
                 let bookId = e.target.value
                 let book = bookList.find(book => book.id === bookId)
-                existingElement && root.removeChild(existingElement);
-                bookList.length > 0 && searchField.value && root.insertAdjacentHTML('beforeend', bookDetails(book));
+                bookList.length > 0 && searchField.value && root.insertAdjacentHTML('beforeend', bookDetails(book)); /* visar omslagsbild för boken, från bookdetails*/
             }
         });
 
-        bookUl.addEventListener("mouseout", function(e) {
+        bookUl.addEventListener("mouseout", function(e) { /* gör så bilden försvinner när mussen inte pekar*/
             let bookDetail = document.querySelector("#bookDetail");
             if(bookDetail)
                 bookDetail.remove();
